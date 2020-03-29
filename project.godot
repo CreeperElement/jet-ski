@@ -17,3 +17,7 @@ _global_script_class_icons={
 
 config/name="Jet-ski"
 config/icon="res://icon.png"
+
+[autoload]
+
+NodeEditor="*res://addons/node_path_editor/node_editor.gd"

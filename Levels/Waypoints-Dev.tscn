@@ -1,23 +1,77 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/SkiBody.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Waypoint.gd" type="Script" id=2]
 
-[sub_resource type="SphereShape" id=1]
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1, 0.530051, 0.633539 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 2.66241, 0.52904, 1.2434 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 2.43119, 0.538574, 1.35257 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 2.63849, 0.587767, 1.38426 )
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 2.93446, 0.0848515, 1 )
 
 [node name="Spatial" type="Spatial"]
-
-[node name="Area" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45615, 3.21208 )
-script = ExtResource( 2 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Area"]
-shape = SubResource( 1 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 2.25, 5 )
+transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 6.12388, 15.9322 )
 
 [node name="SkiBody" parent="." instance=ExtResource( 1 )]
-[connection signal="body_entered" from="Area" to="Area" method="_on_Area_body_entered"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.80201, 0 )
+
+[node name="Waypoints" type="Node" parent="."]
+
+[node name="start" type="Area" parent="Waypoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.08973, 0.685789 )
+script = ExtResource( 2 )
+Edges = [ "left", "right" ]
+
+[node name="CollisionShape" type="CollisionShape" parent="Waypoints/start"]
+shape = SubResource( 1 )
+
+[node name="left" type="Area" parent="Waypoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.107073, 2.37722, 4.1471 )
+script = ExtResource( 2 )
+Edges = [ "end" ]
+
+[node name="CollisionShape" type="CollisionShape" parent="Waypoints/left"]
+shape = SubResource( 2 )
+
+[node name="right" type="Area" parent="Waypoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.08266, 1.45615, 8.75049 )
+script = ExtResource( 2 )
+Edges = [ "end" ]
+
+[node name="CollisionShape" type="CollisionShape" parent="Waypoints/right"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.47458, -1.6663 )
+shape = SubResource( 4 )
+
+[node name="end" type="Area" parent="Waypoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.266912, -1.35994, 10.9183 )
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Waypoints/end"]
+shape = SubResource( 3 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+transform = Transform( -1.53095e-07, -5.57222e-08, -1, -0.34202, 0.939693, 0, 0.939693, 0.34202, -1.62921e-07, -0.318279, 3.18889, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.92779, 0.16321, 0 )
+shape = SubResource( 5 )
+
+[node name="StaticBody2" type="StaticBody" parent="."]
+transform = Transform( -1.53095e-07, -5.57222e-08, -1, -0.34202, 0.939693, 0, 0.939693, 0.34202, -1.62921e-07, -0.318279, -0.828799, 4.36693 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.92779, 0.16321, 0 )
+shape = SubResource( 5 )
