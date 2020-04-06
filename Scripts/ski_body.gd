@@ -1,28 +1,27 @@
 extends KinematicBody
 
 onready var current_node
-var out_of_bounds = false
+
 var velocity = Vector3.ZERO
 var Terminal_Velocity = 200
 
 func _ready():
-	current_node = get_tree().get_root().get_node("Spatial/Waypoints/start")
-	print(current_node.name)
+	connect("illegal_waypoint_traversal", self, "_handle_illegal_waypoint_traversal")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	if out_of_bounds:
-		print("Out of Bounds")
+	velocity = fall()
+	move_and_slide(velocity * delta)
+
+func _handle_illegal_waypoint_traversal(last_waypoint):
+	print("Uh oh")
+	pass
+
+func fall():
 	velocity = velocity + (Vector3.DOWN * 9.81)
 	if(velocity.length() >= Terminal_Velocity):
 		velocity = velocity.normalized() * Terminal_Velocity
-	move_and_slide(velocity * delta)
+	return velocity
 
-func printMessage():
-	print("This is a message")
-
-func process_next_node(next_node):
-	if current_node.has_valid_child(next_node):
-		current_node = next_node
-	else:
-		out_of_bounds = true
+func get_player_name():
+	return "player1"
