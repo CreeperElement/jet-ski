@@ -14,7 +14,11 @@ func _physics_process(delta):
 	move_and_slide(velocity * delta)
 
 func _handle_illegal_waypoint_traversal(last_waypoint):
-	print("Uh oh")
+	print("Illegal Waypoint")
+	pass
+
+func _handle_player_finished():
+	print("Player Finished")
 	pass
 
 func fall():

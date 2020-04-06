@@ -13,12 +13,15 @@ func _ready():
 		children.append(waypoint_node.get_node(node_name))
 
 func _on_body_entered(body):
-	if(body.get_name()=="ski-body"):
+	if body.get_name()=="ski-body":
 		emit_signal("_waypoint_entered", body, self)
+
+func get_child_count():
+	return children.size()
 
 func has_valid_child(waypoint):
 	for child in children:
-		if(waypoint.name == child.name):
+		if waypoint.name == child.name:
 			return true
 	# Happens when we drop player back on the node to get back in bounds
 	if waypoint.name == name:
