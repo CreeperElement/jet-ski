@@ -32,7 +32,10 @@ func center(body):
 	var center_pos = get_transform().origin
 	
 	var difference = center_pos - body_pos
-	difference = difference * get_global_transform().basis.x
-	print(get_global_transform().basis.x)
+	var zBasis = get_global_transform().basis.z
+	if zBasis.z == 1 or zBasis.x == -1:
+		difference = difference * get_global_transform().basis.x
+	else:
+		difference = difference * -get_global_transform().basis.x
 	return difference*2
 	

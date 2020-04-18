@@ -41,4 +41,4 @@ transform = Transform( -0.0637661, 0.498982, -0.864263, 0, 0.866025, 0.5, 0.9979
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.419, 2.116, 2.783 )
 
 [node name="ConveyorBox" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.194442, 4.74331, -0.205978 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0195606, 4.74331, -0.277362 )
