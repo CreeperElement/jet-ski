@@ -3,7 +3,6 @@ extends Spatial
 var bodies = []
 
 func _ready():
-	print($PushArea)
 	$PushArea.connect("body_entered", self, "_on_push_entered")
 	$PushArea.connect("body_exited", self, "_on_push_exited")
 
@@ -13,7 +12,12 @@ func _on_push_entered(body):
 	bodies.append(body)
 
 func _on_push_exited(body):
-	body.velocity = Vector3(body.velocity.x, 0, body.velocity.z)
+	if body.get_name() != "pushable":
+		return
+	var velocity = body.velocity
+	velocity = Vector3(body.velocity.x, 0, body.velocity.z)
+	body.velocity = velocity
+	bodies.remove(bodies.find(body))
 
 func _physics_process(delta):
 	for body in bodies:
