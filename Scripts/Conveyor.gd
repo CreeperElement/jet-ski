@@ -3,8 +3,8 @@ extends Spatial
 var bodies = []
 
 func _ready():
-	pass
-	connect("body_entered", self, "_on_push_entered")
+	print($PushArea)
+	$PushArea.connect("body_entered", self, "_on_push_entered")
 
 func _on_push_entered(body):
 	if body.get_name() != "pushable":
