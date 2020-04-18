@@ -22,6 +22,17 @@ func _physics_process(delta):
 
 func set_velocity(body):
 	var new_velocity = body.velocity
-	var localBasis = self.get_global_transform().basis.z
+	var localBasis = transform.basis.z
 	new_velocity = Vector3(localBasis.x, -1, localBasis.z)
+	new_velocity += center(body)
 	body.velocity = new_velocity
+
+func center(body):
+	var body_pos = body.get_transform().origin
+	var center_pos = get_transform().origin
+	
+	var difference = center_pos - body_pos
+	difference = difference * get_global_transform().basis.x
+	print(get_global_transform().basis.x)
+	return difference*2
+	
