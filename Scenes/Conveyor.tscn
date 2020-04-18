@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Models/conveyor.dae" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Conveyor.gd" type="Script" id=2]
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.59, 0.17, 0.998873 )
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.589863, 0.369503, 1 )
+
+[node name="Conveyor" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="Model" parent="." instance=ExtResource( 1 )]
+
+[node name="PushArea" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="PushArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.453094, 0 )
+shape = SubResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="CollisionBox" type="CollisionShape" parent="StaticBody"]
+shape = SubResource( 1 )
