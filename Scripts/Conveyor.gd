@@ -14,9 +14,6 @@ func _on_push_entered(body):
 func _on_push_exited(body):
 	if body.get_name() != "pushable":
 		return
-	var velocity = body.velocity
-	velocity = Vector3(body.velocity.x, 0, body.velocity.z)
-	body.velocity = velocity
 	bodies.remove(bodies.find(body))
 
 func _physics_process(delta):
