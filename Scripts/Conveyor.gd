@@ -3,8 +3,10 @@ extends Spatial
 var bodies = []
 
 func _ready():
-	$PushArea.connect("body_entered", self, "_on_push_entered")
-	$PushArea.connect("body_exited", self, "_on_push_exited")
+	if $PushArea.connect("body_entered", self, "_on_push_entered") != 0:
+		print("Error connecting on push entered")
+	if $PushArea.connect("body_exited", self, "_on_push_exited") != 0:
+		print("Error connecting on push exited")
 
 func _on_push_entered(body):
 	if body.get_name() != "pushable":
@@ -18,13 +20,13 @@ func _on_push_exited(body):
 
 func _physics_process(delta):
 	for body in bodies:
-		set_velocity(body)
+		set_velocity(body, delta)
 
-func set_velocity(body):
+func set_velocity(body, delta):
 	var new_velocity = body.velocity
 	var localBasis = transform.basis.z
 	new_velocity = Vector3(localBasis.x, -1, localBasis.z)
-	new_velocity += center(body)
+	new_velocity += center(body)*delta*120
 	body.velocity = new_velocity
 
 func center(body):
@@ -37,5 +39,5 @@ func center(body):
 		difference = difference * get_global_transform().basis.x
 	else:
 		difference = difference * -get_global_transform().basis.x
-	return difference*2
+	return difference
 	

@@ -15,4 +15,4 @@ func _physics_process(delta):
 	velocity += Gravity*delta
 	if velocity.y >= MAX_FALL:
 		velocity.y = MAX_FALL
-	move_and_slide(velocity)
+	velocity = move_and_slide(velocity)
